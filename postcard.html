@@ -1,19 +1,100 @@
+<head>
+	<style>
+		.Postcard {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: flex-start;
+
+			border: 1px solid green;
+			width: 1000px;
+			margin: 2rem;
+			padding: 1rem;
+		}
+
+		.Postcard_img {
+			display: flex;
+			flex: 2;
+
+			border: 1px solid green;
+			height: 500px;
+			width: 100%;
+
+			background-image: url("https://i.pinimg.com/736x/ef/9a/26/ef9a26a30fd3d1db91aadeb9b0b3d5fe.jpg");
+			background-color: #cccccc;
+			background-position: center;
+			background-repeat: no-repeat;
+			background-size: cover;
+		}
+
+		.Postcard_content {
+			display: flex;
+			flex: 1;
+		}
+
+		.PostcardContent {
+			display: flex;
+			flex: 1;
+
+			flex-direction: column;
+			justify-content: space-between;
+
+			padding: 1rem;
+		}
+
+		.PostcardContent_to,
+		.PostcardContent_from {
+			font-size: 1.5rem;
+			line-height: 1rem;
+			font-weight: 500;
+			text-align: right;
+		}
+
+		.PostcardContent_message {
+			margin-top: 3rem;
+		}
+	</style>
+</head>
 <body>
 	<div id="root"></div>
 
 	<script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+	<script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+	<script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
 
     <script type="text/babel">
-    	const rootElement = document.getElementById('root');
+		const rootElement = document.getElementById('root');
+		
+		const Postcard = (props) => {
+			return (
+				<div className="Postcard">
+					<div className="Postcard_img" />
+					<div className="Postcard_content">
+						<div className="PostcardContent">
+							<p className="PostcardContent_to">To: {props.to}</p>
+							<p className="PostcardContent_from">From: Yvone</p>
+							<div className="PostcardContent_message">
+								{props.children}
+							</div>
+						</div>
+					</div>
+				</div>
+			)
+		}
 
-    	const app = (
-    		<>
-    			<p>Hello World!</p>
-    		</>
-    	)
+		//proptypes!
+		Postcard.propTypes = {
+			to: PropTypes.string.isRequired,
+			children: PropTypes.node,
+		}
 
-    	ReactDOM.render(app, rootElement);
+		const App = (
+			<Postcard to="friend">
+				Hello! how are you?
+			</Postcard>
+		)
+
+    	ReactDOM.render(App, rootElement);
     </script>
 </body>
