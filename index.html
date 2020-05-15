@@ -1,17 +1,73 @@
+<html>
 <head>
-	<link rel="stylesheet" href="./index.css">
+	<!-- <link rel="stylesheet" type="text/css" href="./index.css"> -->
+	<!-- <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet"> -->
+	<style>
+		.box {
+			border: 1px solid black;
+			text-align: center;
+			vertical-align: center;
+		}
+
+		.box--small {
+			width: 5rem;
+			height: 5rem;
+		}
+
+		.box--medium {
+			width: 8rem;
+			height: 8rem;
+		}
+
+		.box--large {
+			width: 11rem;
+			height: 11rem;
+		}
+	</style>
 </head>
 <body>
-    <div id="root"></div>
-    <!-- <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script> -->
-    <script type="text/javascript">
-    	const rootElement = document.getElementById('root');
-    	const element = document.createElement('div');
-    	element.textContent = 'Hello World';
-    	element.className = 'container';
+	<div id="root"></div>
 
-    	rootElement.appendChild(element);
+    <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+    <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+    <script src="https://unpkg.com/react-date-picker@5.3.27/react-date-picker.js"></script>
+    
+    <script type="text/babel">
+		const rootElement = document.getElementById('root');
+
+		const Box = (props) => {
+			const {
+				className = '',
+				style,
+				...rest
+			} = props;
+
+			return (
+				<div
+					className={`box ${className}`}
+					style={{fontStyle: 'italic', ...style}}
+					{...rest}
+				/>
+			);
+		}
+		
+		const App = (
+			<>
+				<Box className="box--small" style={{backgroundColor: 'lightblue'}}>
+					small lightblue box
+				</Box>
+				<Box className="box--medium" style={{backgroundColor: 'pink'}}>
+					medium pink box
+				</Box>
+				<Box className="box--large" style={{backgroundColor: 'orange'}}>
+					large orange box
+				</Box>
+			</>
+		);
+		
+		ReactDOM.render(App, rootElement);
     </script>
 </body>
+</html>
