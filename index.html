@@ -13,23 +13,34 @@
     <script type="text/babel">
 		const rootElement = document.getElementById('root');
 
+		const state = { eventCount: 0, username: '' };
+
 		function App() {
 			return (
 				<div className="flex flex-col m-5">
-					<p className="font-bold text-3xl mb-5">There has been 0 events</p>
+					<p className="font-bold text-3xl mb-5">There has been {state.eventCount} events</p>
 					
 					<button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 mb-5 rounded">
 						Click me!
 					</button>
 					
-					<p className="font-bold text-3xl mb-5">You typed:</p>
+					<p className="font-bold text-3xl mb-5">You typed: {state.username}</p>
 
 					<input className="border border-gray-500 py-2 px-3 mb-5" />
 				</div>
 			)
 		}
-		
-		ReactDOM.render(<App />, rootElement);
+
+		function setState(newState) {
+			Object.assign(state, newState);
+			renderApp();
+		}
+
+		function renderApp() {
+			ReactDOM.render(<App />, rootElement);
+		}
+
+		renderApp();
     </script>
 </body>
 </html>
