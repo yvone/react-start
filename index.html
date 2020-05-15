@@ -14,8 +14,12 @@
 		const rootElement = document.getElementById('root');
 
 		function App() {
-			const [username, setUsername] = React.useState('');
+			const [username, setUsername] = React.useState(window.localStorage.getItem('username') || '');
 			const [eventCount, setEventCount] = React.useState(0);
+
+			React.useEffect(() => {
+				window.localStorage.setItem('username', username);
+			});
 
 			function handleClick() {
 				setEventCount(eventCount + 1);
