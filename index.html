@@ -1,29 +1,6 @@
 <html>
 <head>
-	<!-- <link rel="stylesheet" type="text/css" href="./index.css"> -->
-	<!-- <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet"> -->
-	<style>
-		.box {
-			border: 1px solid black;
-			text-align: center;
-			vertical-align: center;
-		}
-
-		.box--small {
-			width: 5rem;
-			height: 5rem;
-		}
-
-		.box--medium {
-			width: 8rem;
-			height: 8rem;
-		}
-
-		.box--large {
-			width: 11rem;
-			height: 11rem;
-		}
-	</style>
+	<link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body>
 	<div id="root"></div>
@@ -32,49 +9,27 @@
     <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
     <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
-    <script src="https://unpkg.com/react-date-picker@5.3.27/react-date-picker.js"></script>
     
     <script type="text/babel">
 		const rootElement = document.getElementById('root');
 
-		const Box = (props) => {
-			const {
-				className = '',
-				style,
-				size,
-				color,
-				...rest
-			} = props;
-
-			const sizeClassName = size ? `box--${size}` : '';
-			const colorStyle = color ? {backgroundColor: color} : {};
-
+		function App() {
 			return (
-				<div
-					className={`box ${className} ${sizeClassName}`}
-					style={{fontStyle: 'italic', ...colorStyle, ...style}}
-					{...rest}
-				/>
-			);
+				<div className="flex flex-col m-5">
+					<p className="font-bold text-3xl mb-5">There has been 0 events</p>
+					
+					<button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 mb-5 rounded">
+						Click me!
+					</button>
+					
+					<p className="font-bold text-3xl mb-5">You typed:</p>
+
+					<input className="border border-gray-500 py-2 px-3 mb-5" />
+				</div>
+			)
 		}
 		
-		const App = (
-			<>
-				<Box
-					size="small"
-					color="lightblue"
-					children="small lightblue box"
-				/>
-				<Box className="box--medium" style={{backgroundColor: 'pink'}}>
-					medium pink box
-				</Box>
-				<Box className="box--large" style={{backgroundColor: 'orange'}}>
-					large orange box
-				</Box>
-			</>
-		);
-		
-		ReactDOM.render(App, rootElement);
+		ReactDOM.render(<App />, rootElement);
     </script>
 </body>
 </html>
