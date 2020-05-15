@@ -13,21 +13,22 @@
     <script type="text/babel">
 		const rootElement = document.getElementById('root');
 
-		const state = { eventCount: 0, username: '' };
-
 		function App() {
+			const [username, setUsername] = React.useState('');
+			const [eventCount, setEventCount] = React.useState(0);
+
 			function handleClick() {
-				setState({ eventCount: state.eventCount + 1 });
+				setEventCount(eventCount + 1);
 			}
 
 			function handleChange(event) {
-				setState({ username: event.target.value })
+				setUsername(event.target.value);
 			}
 
 			return (
 				<div className="flex flex-col m-5">
 					<p className="font-bold text-3xl mb-5">
-						There has been {state.eventCount} events
+						There has been {eventCount} events
 					</p>
 					
 					<button
@@ -38,10 +39,14 @@
 					</button>
 					
 					<p className="font-bold text-3xl mb-5">
-						You typed: {state.username}
+						You typed: {username}
 					</p>
 
+					<label className="text-sm my-2 font-bold" htmlFor="username">
+						Username:
+					</label>
 					<input
+						id="username"
 						className="border border-gray-500 py-2 px-3 mb-5"
 						onChange={handleChange}
 					/>
@@ -49,16 +54,7 @@
 			)
 		}
 
-		function setState(newState) {
-			Object.assign(state, newState);
-			renderApp();
-		}
-
-		function renderApp() {
-			ReactDOM.render(<App />, rootElement);
-		}
-
-		renderApp();
+		ReactDOM.render(<App />, rootElement);
     </script>
 </body>
 </html>
