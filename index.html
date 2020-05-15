@@ -41,13 +41,18 @@
 			const {
 				className = '',
 				style,
+				size,
+				color,
 				...rest
 			} = props;
 
+			const sizeClassName = size ? `box--${size}` : '';
+			const colorStyle = color ? {backgroundColor: color} : {};
+
 			return (
 				<div
-					className={`box ${className}`}
-					style={{fontStyle: 'italic', ...style}}
+					className={`box ${className} ${sizeClassName}`}
+					style={{fontStyle: 'italic', ...colorStyle, ...style}}
 					{...rest}
 				/>
 			);
@@ -55,9 +60,11 @@
 		
 		const App = (
 			<>
-				<Box className="box--small" style={{backgroundColor: 'lightblue'}}>
-					small lightblue box
-				</Box>
+				<Box
+					size="small"
+					color="lightblue"
+					children="small lightblue box"
+				/>
 				<Box className="box--medium" style={{backgroundColor: 'pink'}}>
 					medium pink box
 				</Box>
