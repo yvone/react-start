@@ -105,19 +105,13 @@
 
 		function HexBot() {
 			const [status, setStatus] = React.useState('idle');
-			const [color, setColor] = React.useState('#EBEBEB');
+			const [colors, setColors] = React.useState([]);
 			const [error, setError] = React.useState(null);
 
-			/** Because the dependency list of this effect is empty,
-			* this effect will only run once, when the component is first rendered
-			*/
-			React.useEffect(() => {
-				getNewColor();
-			}, []);
-
-			function getNewColor() {
+			function getAListOfColors() {
 				setStatus('loading');
-				fetch('http://api.noopschallenge.com/hexbot').then(
+				// Docs to use the hexbot API: https://github.com/noops-challenge/hexbot
+				fetch('http://api.noopschallenge.com/hexbot?count=10').then(
 					(response) => {
 						/** If we don't receive a successful response (status code: 200 OK)
 						* then something happened like: status 404, not found or status 500, API error
@@ -134,7 +128,7 @@
 				).then(
 					data => {
 						setStatus('resolved');
-						setColor(data.colors[0].value);
+						setColors(data.colors);
 					}
 				).catch(
 					error => {
@@ -162,24 +156,34 @@
 			}
 
 			return (
-				<div className="flex flex-col p-5" style={{backgroundColor: color}}>
+				<div className="flex flex-col p-5 bg-gray-200">
 					<p className="font-bold text-3xl mb-5">
-						Click the button to get a new color!
+						Click the button to get a list of colors
 					</p>
 					
 					<button
 						className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 mb-5 rounded"
-						onClick={getNewColor}
+						onClick={getAListOfColors}
 					>
 						Click me!
 					</button>
 
-					{(status === 'idle' || status === 'loading') && (
+					{status === 'idle' && (
+						<p>Waiting for a list of colors</p>
+					)}
+
+					{status === 'loading' && (
 						<p>Loading...</p>
 					)}
 
 					{status === 'resolved' && (
-						<p>Existing color: {color}</p>
+						<ul>
+							<li>color 1</li>
+							<li>color 2</li>
+							<li>color 3</li>
+							<li>color 4</li>
+							<li>color 5</li>
+						</ul>
 					)}
 				</div>
 			)
