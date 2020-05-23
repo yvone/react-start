@@ -107,7 +107,25 @@
 			const [color, setColor] = React.useState('#EBEBEB');
 
 			function getNewColor() {
-				// TODO: fetch a new color from hexbot API
+				fetch('http://api.noopschallenge.com/hexbot').then(
+					(response) => {
+						/** If we don't receive a successful response (status code: 200 OK)
+						* then something happened like: status 404, not found or status 500, API error
+						*/
+						if(!response.ok) {
+							// Throw an error, this will be caught by .catch and printed on the console
+							throw new Error(`Network response was not ok, status code: ${response.status}`);
+						}
+						/** This is just an HTTP response, not the actual JSON.
+						* To extract the JSON body content from the response, we use the json() method
+						*/
+						return response.json();
+					}
+				).then(
+					data => setColor(data.colors[0].value)
+				).catch(
+					error => console.error('There has been a problem with your fetch operation;', error)
+				);
 			}
 
 			return (
