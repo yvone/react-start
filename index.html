@@ -180,7 +180,9 @@
 						<ul>
 							{colors.map(item => {
 								return (
-									<li>{item.value}</li>
+									<li key={item.value}>
+										{item.value}
+									</li>
 								)
 							})}
 						</ul>
