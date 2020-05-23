@@ -180,7 +180,11 @@
 						<ul>
 							{colors.map(item => {
 								return (
-									<li key={item.value}>
+									<li
+										key={item.value}
+										className="p-2 mb-2"
+										style={{backgroundColor: item.value}}
+									>
 										{item.value}
 									</li>
 								)
