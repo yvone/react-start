@@ -103,7 +103,32 @@
 			)
 		}
 
-		ReactDOM.render(<App />, rootElement);
+		function HexBot() {
+			const [color, setColor] = React.useState('#EBEBEB');
+
+			function getNewColor() {
+				// TODO: fetch a new color from hexbot API
+			}
+
+			return (
+				<div className="flex flex-col p-5" style={{backgroundColor: color}}>
+					<p className="font-bold text-3xl mb-5">
+						Click the button to get a new color!
+					</p>
+					
+					<button
+						className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 mb-5 rounded"
+						onClick={getNewColor}
+					>
+						Click me!
+					</button>
+
+					<p>Existing color: {color}</p>
+				</div>
+			)
+		}
+
+		ReactDOM.render(<HexBot />, rootElement);
     </script>
 </body>
 </html>
