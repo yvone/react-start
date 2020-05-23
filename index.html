@@ -178,11 +178,11 @@
 
 					{status === 'resolved' && (
 						<ul>
-							<li>color 1</li>
-							<li>color 2</li>
-							<li>color 3</li>
-							<li>color 4</li>
-							<li>color 5</li>
+							{colors.map(item => {
+								return (
+									<li>{item.value}</li>
+								)
+							})}
 						</ul>
 					)}
 				</div>
