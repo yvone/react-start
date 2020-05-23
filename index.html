@@ -106,6 +106,13 @@
 		function HexBot() {
 			const [color, setColor] = React.useState('#EBEBEB');
 
+			/** Because the dependency list of this effect is empty,
+			* this effect will only run once, when the component is first rendered
+			*/
+			React.useEffect(() => {
+				getNewColor();
+			}, []);
+
 			function getNewColor() {
 				fetch('http://api.noopschallenge.com/hexbot').then(
 					(response) => {
